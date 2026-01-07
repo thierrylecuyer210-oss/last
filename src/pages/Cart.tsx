@@ -54,7 +54,7 @@ const Cart = () => {
                 {t('cart.title')} <span className="text-primary">{t('cart.title2')}</span>
               </h1>
             </div>
-            <p className="text-muted-foreground">{t('cart.emptyDesc')}</p>
+            <p className="text-muted-foreground">{cartItems.length > 0 ? t('cart.description') : t('cart.emptyDesc')}</p>
           </div>
 
           {cartItems.length > 0 ? (
