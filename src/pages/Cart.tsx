@@ -4,7 +4,6 @@ import WarningBanner from '@/components/WarningBanner';
 import Footer from '@/components/Footer';
 import { ArrowLeft, Plus, Minus, Trash2, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import freeShippingBanner from '@/assets/free-shipping-banner.png';
 
@@ -12,6 +11,10 @@ import { useCart } from '@/contexts/CartContext';
 
 
 const Cart = () => {
+  const { items: cartItems, removeFromCart, updateQuantity, cartTotal } = useCart();
+  const { t } = useLanguage();
+  const subtotal = cartTotal;
+
   const freeShippingThreshold = 100;
   const hasFreeShipping = subtotal >= freeShippingThreshold;
   const shipping = hasFreeShipping ? 0 : 4.95;
@@ -51,7 +54,7 @@ const Cart = () => {
                 {t('cart.title')} <span className="text-primary">{t('cart.title2')}</span>
               </h1>
             </div>
-            <p className="text-muted-foreground">{t('cart.emptyDesc')}</p>
+            <p className="text-muted-foreground">{cartItems.length > 0 ? t('cart.reviewDesc') : t('cart.emptyDesc')}</p>
           </div>
 
           {cartItems.length > 0 ? (
